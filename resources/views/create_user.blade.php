@@ -18,6 +18,11 @@
                 <div class="d-flex justify-content-center">
                     <input class="form-control-lg" type="text" id="nama" name="nama">
                 </div>
+                @foreach($errors->get('nama') as $msg)
+                    <div class="d-flex justify-content-center">
+                        <p class="text-danger">{{ $msg }}</p>    
+                    </div>
+                @endforeach
             </div>
             <div class="m-2">
                 <div class="d-flex justify-content-center">
@@ -26,13 +31,23 @@
                 <div class="d-flex justify-content-center">
                     <input class="form-control-lg" type="text" id="npm" name="npm">
                 </div>
+                @foreach($errors->get('npm') as $msg)
+                    <div class="d-flex justify-content-center">
+                        <p class="text-danger">{{ $msg }}</p>    
+                    </div>
+                @endforeach
             </div>
             <div class="m-2">
                 <div class="d-flex justify-content-center">
-                    <label class="form-label" for="kelas">Kelas :</label>
+                    <label class="form-label" for="kelas_id">Kelas :</label>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <input class="form-control-lg" type="text" id="kelas" name="kelas">
+                    {{-- <input class="form-control-lg" type="text" id="kelas" name="kelas"> --}}
+                    <select class="form-select-lg" name="kelas_id" id="kelas_id">
+                        @foreach($kelas as $kelasItem)
+                            <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="d-flex justify-content-center">
