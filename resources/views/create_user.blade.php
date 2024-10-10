@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container position-absolute top-50 start-50 translate-middle bg-warning rounded-5 p-5" style="max-width: 50rem; box-shadow: 0px 0px 50px gray">
-        <form action="{{ route('user.store') }}" method="POST">
+        <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="m-2">
                 <div class="d-flex justify-content-center">
@@ -42,6 +42,19 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="m-2">
+                <div class="d-flex justify-content-center">
+                    <label class="form-label" for="foto">Foto : </label>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input class="form-control-lg" type="file" id="foto" name="foto">
+                </div>
+                @foreach($errors->get('foto') as $msg)
+                    <div class="d-flex justify-content-center">
+                        <p class="text-danger">{{ $msg }}</p>    
+                    </div>
+                @endforeach
             </div>
             <div class="d-flex justify-content-center">
                 <button class="btn btn-secondary mt-5" type="submit">Submit</button>

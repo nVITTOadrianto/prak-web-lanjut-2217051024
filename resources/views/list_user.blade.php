@@ -23,7 +23,7 @@
                 <td><?= $user['nama'] ?></td>
                 <td><?= $user['npm'] ?></td>
                 <td class="text-center"><?= $user['nama_kelas'] ?></td>
-                <td></td>
+                <td><a href="{{ route('user.show', $user->id) }}" class="btn btn-primary">Detail</a></td>
             </tr>
             <?php 
                 } 
