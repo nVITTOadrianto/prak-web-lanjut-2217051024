@@ -40,21 +40,30 @@ class UserController extends Controller
 
     public function store(Request $request) 
     {
-        // $this->userModel->create([
-        //     'nama' => $request->input('nama'),
-        //     'npm' => $request->input('npm'),
-        //     'kelas_id' => $request->input('kelas_id')
-        // ]);
-
-        $validatedData = $request->validate([
+        
+        $request->validate([
             'nama' => 'required|string|max:255',
             'npm' => 'required|string|max:255',
             'kelas_id' => 'required|exists:kelas,id',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $this->userModel->create($validatedData);
+        if($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $fotoName = $foto->hashName();
+            $fotoPath = $foto->move(('upload/img'), $fotoName);
+        } else {
+            $fotoPath = null;
+        }
 
-        return redirect()->to('/user/list');
+        $this->userModel->create([
+            'nama' => $request->input('nama'),
+            'npm' => $request->input('npm'),
+            'kelas_id' => $request->input('kelas_id'),
+            'foto' => $fotoPath
+        ]);
+
+        return redirect()->to('/user/list')->with('success', 'User berhasil ditambahkan');
     }
 
     public function index()
@@ -65,5 +74,16 @@ class UserController extends Controller
         ];
 
         return view('list_user', $data);
+    }
+
+    public function show($id) {
+        $user = $this->userModel->getUser($id);
+
+        $data = [
+            'title' => "Profile",
+            'user' => $user
+        ];
+
+        return view('profile', $data);
     }
 }
