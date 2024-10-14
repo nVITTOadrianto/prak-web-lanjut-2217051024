@@ -50,18 +50,17 @@ class UserController extends Controller
 
         if($request->hasFile('foto')) {
             $foto = $request->file('foto');
-            $fotoName = $foto->hashName();
-            $fotoPath = $foto->move(('upload/img'), $fotoName);
-        } else {
-            $fotoPath = null;
+            $fotoName = time() . '_' . $foto->getClientOriginalName();
+            // $fotoPath = $foto->move(('upload/img'), $fotoName);
+            $foto->storeAs('upload/img', $fotoName);
+            
+            $this->userModel->create([
+                'nama' => $request->input('nama'),
+                'npm' => $request->input('npm'),
+                'kelas_id' => $request->input('kelas_id'),
+                'foto' => $foto
+            ]);
         }
-
-        $this->userModel->create([
-            'nama' => $request->input('nama'),
-            'npm' => $request->input('npm'),
-            'kelas_id' => $request->input('kelas_id'),
-            'foto' => $fotoPath
-        ]);
 
         return redirect()->to('/user/list')->with('success', 'User berhasil ditambahkan');
     }
