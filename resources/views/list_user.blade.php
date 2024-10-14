@@ -11,6 +11,7 @@
                 <th>Nama</th>
                 <th>NPM</th>
                 <th>Kelas</th>
+                <th>Foto</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -23,7 +24,16 @@
                 <td><?= $user['nama'] ?></td>
                 <td><?= $user['npm'] ?></td>
                 <td class="text-center"><?= $user['nama_kelas'] ?></td>
-                <td><a href="{{ route('user.show', $user->id) }}" class="btn btn-primary">Detail</a></td>
+                <td class="text-center"><img src="{{ asset($user->foto?? 'assets/img/default.webp') }}" alt="User Photo" width="100" class="mt-2"></td>
+                <td class="text-center">
+                    <a href="{{ route('user.show', $user->id) }}" class="btn btn-primary">Detail</a>
+                    <a href="{{ route('user.edit', $user['id']) }}" class="btn btn-warning">Edit</a>
+                    <form action="{{ route('user.destroy', $user['id']) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method("DELETE")
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">Delete</button>
+                    </form>
+                </td>
             </tr>
             <?php 
                 } 
