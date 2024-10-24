@@ -19,12 +19,12 @@
             </div>
             <div class="m-2">
                 <div class="d-flex justify-content-center">
-                    <label class="form-label" for="npm">NPM : </label>
+                    <label class="form-label" for="semester">Semester : </label>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <input class="form-control-lg" type="text" id="npm" name="npm">
+                    <input class="form-control-lg" type="text" id="semester" name="semester">
                 </div>
-                @foreach($errors->get('npm') as $msg)
+                @foreach($errors->get('semester') as $msg)
                     <div class="d-flex justify-content-center">
                         <p class="text-danger">{{ $msg }}</p>    
                     </div>
@@ -40,6 +40,32 @@
                         @foreach($kelas as $kelasItem)
                             <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
                         @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="m-2">
+                <div class="d-flex justify-content-center">
+                    <label class="form-label" for="fakultas_id">Fakultas :</label>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <select class="form-select-lg" name="fakultas_id" id="fakultas_id">
+                        @foreach($fakultas as $fakultasitem)
+                            <option value="{{ $fakultasitem->id }}">{{ $fakultasitem->nama_fakultas }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="m-2">
+                <div class="d-flex justify-content-center">
+                    <label class="form-label" for="jurusan">Jurusan :</label>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <select class="form-select-lg" name="jurusan" id="jurusan">
+                        <option value="Fisika">Fisika</option>
+                        <option value="Kimia">Kimia</option>
+                        <option value="Biologi">Biologi</option>
+                        <option value="Matematika">Matematika</option>
+                        <option value="Ilmu Komputer">Ilmu Komputer</option>
                     </select>
                 </div>
             </div>

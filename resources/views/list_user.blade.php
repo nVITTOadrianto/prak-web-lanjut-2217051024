@@ -9,8 +9,10 @@
             <tr class="text-center">
                 <th>ID</th>
                 <th>Nama</th>
-                <th>NPM</th>
+                <th>Semester</th>
                 <th>Kelas</th>
+                <th>Fakultas</th>
+                <th>Jurusan</th>
                 <th>Foto</th>
                 <th>Aksi</th>
             </tr>
@@ -22,8 +24,10 @@
             <tr>
                 <td class="text-center"><?= $user['id'] ?></td>
                 <td><?= $user['nama'] ?></td>
-                <td><?= $user['npm'] ?></td>
+                <td><?= $user['semester'] ?></td>
                 <td class="text-center"><?= $user['nama_kelas'] ?></td>
+                <td><?= $user['nama_fakultas'] ?></td>                
+                <td><?= $user['jurusan'] ?></td>
                 <td class="text-center"><img src="{{ asset($user->foto?? 'assets/img/default.webp') }}" alt="User Photo" width="100" class="mt-2"></td>
                 <td class="text-center">
                     <a href="{{ route('user.show', $user->id) }}" class="btn btn-primary">Detail</a>
